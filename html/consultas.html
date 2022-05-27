@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="../img/logopequeño.png" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="../js/app.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultas</title>
+  </head>
+  <body>
+    <!-- LOGO -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-sm-3 col-md-3">
+          <br />
+          <img src="../img/LOGO.png" width="300px" height="150px" alt="" />
+        </div>
+        <!-- NAVBAR -->
+        <div class="col-lg-9 col-sm-9 col-md-9">
+          <br />
+          <br />
+          <nav
+            class="navbar navbar-expand-lg navbar-light rounded container-fluid"
+          >
+            <a class="navbar-brand" href="#"></a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="crud.html"
+                    >Crud</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="consultas.html">Consultas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../index.html">Cerrar Sesion</a>
+                </li>
+                <form class="d-flex">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Buscar en TICKETSON"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-success" type="submit">Buscar</button>
+                </form>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+<h3 style="text-align: center; color: #009a27;">CONSULTAS</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-6 col-md-6">
+          <select class="form-select" aria-label="Default select example" id="cmbConsultas">
+            <option value="0">Inner Join - Left Join</option>
+            <option value="1">Order by</option>
+
+            <option value="2">Max </option>
+            <option value="3">Min</option>
+            <option value="4">Count</option>
+            <option value="5">Sum</option>
+          </select>
+        </div>
+      </div>
+    </div>
+      <div class="container">
+      <div class="row">
+          <div class="col-lg-12 col-sm-12 col-md-12">
+            <button
+            type="button"
+            id="cmbConsultas"
+            class="btn btn-success"
+            onclick="cmbConsultas() "
+          >
+            Consultar
+          </button>
+           
+          </div>
+      </div>
+  </div>
+
+  <!-- TABLA PARA MOSTRAR DATOS -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-sm-12 col-md-12">
+<h2 style="color: #009a27; text-align: center;"     id="titulo"></h2>
+        <table 
+          class="table table-dark table-striped"
+          id="tablaclientes"
+          style="display: none"
+        >
+        <thead>
+
+          <tr>
+            <th scope="col">CLIENTE</th>
+            <th scope="col">TIPO DE DOCUMENTO</th>
+            <th scope="col">CORREO</th>
+            <th scope="col">TELEFONO</th>
+            <th scope="col">DIRRECION</th>
+            <th scope="col">CONSECUTIVO TICKET</th>
+            <th scope="col">DESTINO</th>
+            <th scope="col">HORARIO</th>
+            <th scope="col">VALOR A PAGAR</th>
+          </tr>
+        </thead>
+
+
+          <tbody id="cuerpoinnerjoins">
+            <tr></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+ <!-- TABLA PARA MOSTRAR DATOS2 -->
+ <div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <table
+        class="table table-dark table-striped"
+        id="tablaorderby"
+        style="display: none"
+      >
+    
+      <thead>
+
+        <tr>
+          <th scope="col">CLIENTE</th>
+          <th scope="col">TIPO DE DOCUMENTO</th>
+          <th scope="col">CORREO</th>
+          <th scope="col">TELEFONO</th>
+          <th scope="col">DIRRECION</th>
+          <th scope="col">CONSECUTIVO TICKET</th>
+          <th scope="col">DESTINO</th>
+          <th scope="col">HORARIO</th>
+          <th scope="col">VALOR A PAGAR</th>
+        </tr>
+      </thead>
+
+        <tbody id="cuerpoorderby">
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<!-- TABLA PARA MOSTRAR DATOS3 -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <table
+      
+        class="table table-dark table-striped"
+        id="tablamax"
+        style="display: none"
+      >
+      <tr>
+        <th scope="col">CLIENTE</th>
+        <th scope="col">TIPO DE DOCUMENTO</th>
+        <th scope="col">CORREO</th>
+        <th scope="col">TELEFONO</th>
+        <th scope="col">DIRRECION</th>
+        <th scope="col">CONSECUTIVO TICKET</th>
+        <th scope="col">DESTINO</th>
+        <th scope="col">HORARIO</th>
+        <th scope="col">VALOR A PAGAR</th>
+      </tr>
+        <tbody id="cuerpomax">
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+
+<!-- TABLA PARA MOSTRAR DATOS4 -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <table   
+        class="table table-dark table-striped"
+        id="tablamin"
+        style="display: none"
+      >
+      <tr>
+        <th scope="col">CIUDAD</th>
+        <th scope="col">PRECIO</th>
+        <th scope="col">CLIENTE</th>
+  
+      </tr>
+        <tbody id="cuerpomin">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- TABLA PARA MOSTRAR DATOS5 -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <table
+        class="table table-dark table-striped"
+        id="tablacount"
+        style="display: none"
+      >
+      <tr>
+        <th scope="col">CIUDAD</th>
+        <th scope="col">CANTIDAD DE TICKETS</th>
+      </tr>
+        <tbody id="cuerpocount">
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- TABLA PARA MOSTRAR DATOS6 -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-md-12">
+      <table
+        class="table table-dark table-striped"
+        id="tablasum"
+        style="display: none"
+      >
+      <tr>
+        <th scope="col">CIUDAD</th>
+        <th scope="col">VENTA TOTAL</th>
+      </tr>
+        <tbody id="cuerposum">
+          <tr></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+      <!-- FOOTER -->
+      <div>
+        <div class="container-fluid">
+          <div class="row">
+            <div
+              class="col-lg-6 col-md-6 col-sm-6;"
+              style="background-color: #009a27"
+            >
+              <ul style="color: white">
+                <li>
+                  <h5><b>CONTACTO</b></h5>
+                </li>
+                <ul>
+                  <li>Correo : ticketsOn@hotmail.com</li>
+                  <li>Dirrecion: Calle 72 # 34-43</li>
+                  <li>Telefono: 3004313842</li>
+                  <li>Ciudad: Barranquilla - Atlantico</li>
+                </ul>
+              </ul>
+            </div>
+            <div
+              class="col-lg-6 col-md-6 col-sm-6"
+              style="background-color: #009a27"
+            >
+              <ul style="color: white">
+                <li>
+                  <h5><b>OFERLA LABORAL</b></h5>
+                </li>
+                <ul>
+                  <li>Conductores</li>
+                  <li>Personal de Aseo</li>
+                  <li>Vigilancia</li>
+                  <li>Administrativo</li>
+                  <li>Contable</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div style="text-align: center">
+              ©2022 TICKETSON. Derechos Reservados
+            </div>
+          </div>
+        </div>
+      </div>
+  </body>
+  
+</html>
